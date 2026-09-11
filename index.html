@@ -19,14 +19,10 @@ html{
 
 body{
     font-family:Arial,Helvetica,sans-serif;
-    background:#050505;
-    color:#fff;
-    padding-bottom:100px;
-}
-
-body{
     background:
     radial-gradient(circle at 50% 15%,#350000 0%,#100000 28%,#050505 65%);
+    color:#fff;
+    padding-bottom:100px;
 }
 
 .container{
@@ -228,6 +224,7 @@ body{
 
 .product{
     padding:23px;
+    margin-bottom:18px;
     border-radius:24px;
 
     background:
@@ -244,6 +241,7 @@ body{
     display:flex;
     justify-content:space-between;
     align-items:center;
+    gap:10px;
 }
 
 .product h3{
@@ -258,6 +256,22 @@ body{
     background:rgba(0,230,118,.08);
     padding:7px 11px;
     border-radius:20px;
+    white-space:nowrap;
+}
+
+.duration{
+    display:inline-block;
+    margin-top:12px;
+    padding:7px 13px;
+
+    border-radius:20px;
+
+    background:#350000;
+    border:1px solid #8b0000;
+
+    color:#ff5555;
+    font-size:12px;
+    font-weight:900;
 }
 
 .price{
@@ -451,7 +465,10 @@ body{
 
     </div>
 
-    <div class="product" id="produk">
+
+    <!-- PRODUK 5K -->
+
+    <div class="product" id="produk1">
 
         <div class="product-top">
 
@@ -465,14 +482,17 @@ body{
 
         </div>
 
+        <div class="duration">
+            ⏱ 1 DAY
+        </div>
+
         <div class="price">
             Rp 5.000
         </div>
 
-        <!-- WHATSAPP -->
         <a
             class="order"
-            href="https://wa.me/6285284791734?text=Halo%20Admin%2C%20saya%20mau%20pesan%20PANEL%20XEON%20seharga%20Rp%205.000"
+            href="https://wa.me/6285284791734?text=Halo%20Admin%2C%20saya%20mau%20pesan%20PANEL%20XEON%201%20DAY%20seharga%20Rp%205.000"
             target="_blank"
             rel="noopener noreferrer">
 
@@ -482,17 +502,58 @@ body{
 
     </div>
 
+
+    <!-- PRODUK 10K -->
+
+    <div class="product" id="produk2">
+
+        <div class="product-top">
+
+            <h3>
+                PANEL XEON
+            </h3>
+
+            <span class="status">
+                ● TERSEDIA
+            </span>
+
+        </div>
+
+        <div class="duration">
+            ⏱ 3 DAY
+        </div>
+
+        <div class="price">
+            Rp 10.000
+        </div>
+
+        <a
+            class="order"
+            href="https://wa.me/6285284791734?text=Halo%20Admin%2C%20saya%20mau%20pesan%20PANEL%20XEON%203%20DAY%20seharga%20Rp%2010.000"
+            target="_blank"
+            rel="noopener noreferrer">
+
+            🔥 PESAN SEKARANG
+
+        </a>
+
+    </div>
+
+
     <div class="note">
 
         ⚡ PANEL XEON ⚡
         <br>
-        Harga produk: <b>Rp 5.000</b>
+        1 DAY — <b>Rp 5.000</b>
+        <br>
+        3 DAY — <b>Rp 10.000</b>
         <br>
         Silakan hubungi admin untuk melakukan pemesanan.
 
     </div>
 
 </div>
+
 
 <div class="bottom">
 
@@ -506,6 +567,7 @@ body{
 
 </div>
 
+
 <script>
 
 function cariProduk(){
@@ -516,22 +578,43 @@ function cariProduk(){
         .value
         .toLowerCase();
 
-    var produk =
+    var produk1 =
         document
-        .getElementById("produk");
+        .getElementById("produk1");
 
-    var text =
-        produk
+    var produk2 =
+        document
+        .getElementById("produk2");
+
+    var text1 =
+        produk1
         .innerText
         .toLowerCase();
 
-    if(text.indexOf(input) !== -1){
+    var text2 =
+        produk2
+        .innerText
+        .toLowerCase();
 
-        produk.style.display = "block";
+
+    if(text1.indexOf(input) !== -1){
+
+        produk1.style.display = "block";
 
     }else{
 
-        produk.style.display = "none";
+        produk1.style.display = "none";
+
+    }
+
+
+    if(text2.indexOf(input) !== -1){
+
+        produk2.style.display = "block";
+
+    }else{
+
+        produk2.style.display = "none";
 
     }
 
@@ -540,4 +623,4 @@ function cariProduk(){
 </script>
 
 </body>
-</html>
+                               </html>
