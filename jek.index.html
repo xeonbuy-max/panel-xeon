@@ -1,0 +1,742 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#050000">
+<title>JekSetting • INJEKCIT TEAM SETTING</title>
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial,Helvetica,sans-serif;
+}
+
+html{
+    scroll-behavior:smooth;
+}
+
+body{
+    min-height:100vh;
+    color:#fff;
+    background:
+        radial-gradient(circle at 50% -10%,rgba(255,0,0,.30),transparent 35%),
+        radial-gradient(circle at 0% 50%,rgba(150,0,0,.12),transparent 30%),
+        #020202;
+    overflow-x:hidden;
+}
+
+/* SCANLINE */
+body::before{
+    content:"";
+    position:fixed;
+    inset:0;
+    pointer-events:none;
+    z-index:999;
+    opacity:.18;
+    background:repeating-linear-gradient(
+        0deg,
+        transparent 0px,
+        transparent 3px,
+        rgba(255,0,0,.035) 4px
+    );
+}
+
+/* RED GLOW */
+body::after{
+    content:"";
+    position:fixed;
+    width:350px;
+    height:350px;
+    left:50%;
+    top:0;
+    transform:translateX(-50%);
+    background:#f00;
+    filter:blur(180px);
+    opacity:.07;
+    pointer-events:none;
+}
+
+/* HEADER */
+header{
+    padding:30px 18px 22px;
+    text-align:center;
+    border-bottom:1px solid rgba(255,0,0,.22);
+    background:rgba(0,0,0,.55);
+    backdrop-filter:blur(12px);
+}
+
+.logo{
+    font-size:29px;
+    font-weight:1000;
+    letter-spacing:4px;
+    color:#fff;
+    text-shadow:
+        0 0 5px #ff0000,
+        0 0 15px #ff0000,
+        0 0 35px rgba(255,0,0,.8);
+}
+
+.logo span{
+    color:#ff1111;
+}
+
+.subtitle{
+    margin-top:8px;
+    color:#777;
+    font-size:10px;
+    letter-spacing:4px;
+}
+
+/* STATUS */
+.status{
+    display:inline-flex;
+    align-items:center;
+    gap:9px;
+    margin-top:18px;
+    padding:8px 15px;
+    border:1px solid rgba(255,0,0,.6);
+    border-radius:30px;
+    color:#ff3b3b;
+    font-size:10px;
+    letter-spacing:1px;
+    background:rgba(255,0,0,.07);
+    box-shadow:0 0 20px rgba(255,0,0,.15);
+}
+
+.dot{
+    width:8px;
+    height:8px;
+    border-radius:50%;
+    background:#ff0000;
+    box-shadow:0 0 12px #f00;
+    animation:blink 1s infinite;
+}
+
+@keyframes blink{
+    50%{
+        opacity:.25;
+        transform:scale(.7);
+    }
+}
+
+/* HERO */
+.hero{
+    position:relative;
+    margin:22px 14px;
+    padding:25px 20px;
+    border-radius:22px;
+    border:1px solid rgba(255,0,0,.38);
+    overflow:hidden;
+    background:
+        linear-gradient(
+            135deg,
+            rgba(255,0,0,.15),
+            rgba(15,0,0,.85) 55%,
+            rgba(0,0,0,.98)
+        );
+    box-shadow:
+        0 0 30px rgba(255,0,0,.10),
+        inset 0 0 30px rgba(255,0,0,.05);
+}
+
+.hero::before{
+    content:"";
+    position:absolute;
+    top:-100px;
+    right:-100px;
+    width:230px;
+    height:230px;
+    border-radius:50%;
+    background:#f00;
+    filter:blur(90px);
+    opacity:.13;
+}
+
+.hero::after{
+    content:"";
+    position:absolute;
+    left:-100%;
+    top:0;
+    width:50%;
+    height:100%;
+    background:linear-gradient(
+        90deg,
+        transparent,
+        rgba(255,255,255,.06),
+        transparent
+    );
+    transform:skewX(-20deg);
+    animation:sweep 5s infinite;
+}
+
+@keyframes sweep{
+    0%,55%{left:-100%}
+    75%,100%{left:150%}
+}
+
+.hero-content{
+    position:relative;
+    z-index:2;
+}
+
+.mini-title{
+    color:#ff2424;
+    font-size:10px;
+    font-weight:bold;
+    letter-spacing:3px;
+    margin-bottom:8px;
+}
+
+.hero h1{
+    font-size:28px;
+    line-height:1.1;
+    font-weight:1000;
+    text-shadow:0 0 18px rgba(255,0,0,.55);
+}
+
+.hero h1 span{
+    color:#ff1717;
+}
+
+.hero p{
+    margin-top:11px;
+    color:#999;
+    font-size:12px;
+    line-height:1.6;
+}
+
+.features{
+    display:flex;
+    flex-wrap:wrap;
+    gap:7px;
+    margin-top:18px;
+}
+
+.feature{
+    padding:7px 10px;
+    border:1px solid rgba(255,0,0,.3);
+    border-radius:7px;
+    background:rgba(255,0,0,.06);
+    color:#ccc;
+    font-size:9px;
+    letter-spacing:.5px;
+}
+
+/* SECTION */
+section{
+    padding:0 14px 8px;
+}
+
+.section-title{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    margin:25px 2px 14px;
+}
+
+.section-title h2{
+    font-size:15px;
+    white-space:nowrap;
+    letter-spacing:1px;
+    text-shadow:0 0 8px rgba(255,0,0,.35);
+}
+
+.section-title h2::first-letter{
+    color:#f00;
+}
+
+.line{
+    height:1px;
+    flex:1;
+    background:linear-gradient(
+        90deg,
+        rgba(255,0,0,.8),
+        transparent
+    );
+}
+
+/* PRODUCT CARD */
+.product{
+    position:relative;
+    margin-bottom:13px;
+    padding:19px;
+    border-radius:17px;
+    border:1px solid rgba(255,0,0,.24);
+    background:
+        linear-gradient(
+            145deg,
+            rgba(255,0,0,.10),
+            rgba(8,8,8,.98) 60%
+        );
+    box-shadow:
+        0 8px 25px rgba(0,0,0,.5),
+        inset 0 0 25px rgba(255,0,0,.025);
+    overflow:hidden;
+    transition:.25s ease;
+}
+
+.product::before{
+    content:"";
+    position:absolute;
+    left:0;
+    top:0;
+    bottom:0;
+    width:3px;
+    background:#ff0000;
+    box-shadow:0 0 14px #ff0000;
+}
+
+.product::after{
+    content:"";
+    position:absolute;
+    right:-60px;
+    bottom:-70px;
+    width:130px;
+    height:130px;
+    border-radius:50%;
+    background:#f00;
+    filter:blur(70px);
+    opacity:.06;
+}
+
+.product:hover{
+    transform:translateY(-4px);
+    border-color:#ff2222;
+    box-shadow:
+        0 12px 35px rgba(255,0,0,.16),
+        inset 0 0 25px rgba(255,0,0,.05);
+}
+
+/* DISCOUNT */
+.discount{
+    position:absolute;
+    right:12px;
+    top:12px;
+    padding:5px 8px;
+    border-radius:6px;
+    background:linear-gradient(135deg,#ff0000,#9d0000);
+    color:#fff;
+    font-size:8px;
+    font-weight:900;
+    letter-spacing:.5px;
+    box-shadow:
+        0 0 10px rgba(255,0,0,.5);
+}
+
+.product-name{
+    padding-right:95px;
+    color:#fff;
+    font-size:15px;
+    font-weight:900;
+    letter-spacing:.3px;
+}
+
+.product-desc{
+    margin-top:6px;
+    margin-bottom:13px;
+    color:#666;
+    font-size:10px;
+}
+
+.price-box{
+    display:flex;
+    align-items:end;
+    gap:9px;
+}
+
+.old-price{
+    color:#555;
+    font-size:11px;
+    text-decoration:line-through;
+}
+
+.new-price{
+    color:#ff2525;
+    font-size:22px;
+    font-weight:1000;
+    line-height:1;
+    text-shadow:
+        0 0 8px rgba(255,0,0,.45);
+}
+
+.buy{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    gap:7px;
+    margin-top:14px;
+    padding:12px;
+    border-radius:10px;
+    color:#fff;
+    text-decoration:none;
+    font-size:10px;
+    font-weight:900;
+    letter-spacing:1px;
+    background:
+        linear-gradient(90deg,#850000,#ef0000,#850000);
+    background-size:200% 100%;
+    box-shadow:0 0 15px rgba(255,0,0,.18);
+    transition:.25s;
+}
+
+.buy:hover{
+    background-position:100% 0;
+    box-shadow:0 0 25px rgba(255,0,0,.5);
+    transform:scale(1.015);
+}
+
+/* INFO */
+.info{
+    position:relative;
+    margin:20px 14px 95px;
+    padding:19px;
+    border-radius:17px;
+    border:1px solid rgba(255,0,0,.22);
+    background:linear-gradient(
+        135deg,
+        rgba(255,0,0,.07),
+        rgba(8,8,8,.95)
+    );
+}
+
+.info-title{
+    color:#ff2424;
+    font-size:12px;
+    font-weight:bold;
+    letter-spacing:1px;
+    margin-bottom:9px;
+}
+
+.info p{
+    color:#666;
+    font-size:10px;
+    line-height:1.8;
+}
+
+/* FOOTER */
+footer{
+    position:fixed;
+    z-index:1000;
+    left:0;
+    right:0;
+    bottom:0;
+    padding:13px 10px;
+    text-align:center;
+    background:rgba(2,2,2,.94);
+    backdrop-filter:blur(15px);
+    border-top:1px solid rgba(255,0,0,.25);
+    color:#555;
+    font-size:9px;
+    letter-spacing:1.5px;
+}
+
+footer span{
+    color:#e00000;
+}
+
+/* MOBILE */
+@media(max-width:380px){
+    .logo{
+        font-size:24px;
+    }
+
+    .hero h1{
+        font-size:24px;
+    }
+
+    .section-title h2{
+        font-size:13px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+    <div class="logo">✦ <span>JEK</span>SETTING ✦</div>
+    <div class="subtitle">INJEKCIT TEAM SETTING</div>
+
+    <div class="status">
+        <span class="dot"></span>
+        SYSTEM ONLINE
+    </div>
+</header>
+
+<!-- HERO -->
+<div class="hero">
+    <div class="hero-content">
+
+        <div class="mini-title">PREMIUM • EXCLUSIVE • OB55</div>
+
+        <h1>
+            JEKSETTING<br>
+            <span>OB55</span>
+        </h1>
+
+        <p>
+            Koleksi premium JekSetting dengan tampilan
+            eksklusif dan pengalaman yang lebih nyaman.
+        </p>
+
+        <div class="features">
+            <div class="feature">⚡ STABLE</div>
+            <div class="feature">🔥 FAST</div>
+            <div class="feature">☠ PREMIUM</div>
+            <div class="feature">◆ OPTIMIZED</div>
+            <div class="feature">✓ ANDROID</div>
+        </div>
+
+    </div>
+</div>
+
+<!-- DRAG SHOT -->
+<section>
+
+    <div class="section-title">
+        <h2>☠ FILE DRAG SHOT VVIP V2</h2>
+        <div class="line"></div>
+    </div>
+
+    <!-- PRODUCT 1 -->
+    <div class="product">
+        <div class="discount">-37% DISCOUNT</div>
+
+        <div class="product-name">
+            DRAG SHOT 25%
+        </div>
+
+        <div class="product-desc">
+            Version 2 • OB55 • Premium
+        </div>
+
+        <div class="price-box">
+            <div class="old-price">8K</div>
+            <div class="new-price">5K</div>
+        </div>
+
+        <a class="buy"
+           href="https://wa.me/6285794072560?text=Halo%20JekSetting,%20saya%20mau%20beli%20DRAG%20SHOT%2025%%20-%205K">
+           💬 BELI SEKARANG
+        </a>
+    </div>
+
+    <!-- PRODUCT 2 -->
+    <div class="product">
+        <div class="discount">-25% DISCOUNT</div>
+
+        <div class="product-name">
+            DRAG SHOT 50%
+        </div>
+
+        <div class="product-desc">
+            Version 2 • OB55 • Premium
+        </div>
+
+        <div class="price-box">
+            <div class="old-price">20K</div>
+            <div class="new-price">15K</div>
+        </div>
+
+        <a class="buy"
+           href="https://wa.me/6285794072560?text=Halo%20JekSetting,%20saya%20mau%20beli%20DRAG%20SHOT%2050%%20-%2015K">
+           💬 BELI SEKARANG
+        </a>
+    </div>
+
+    <!-- PRODUCT 3 -->
+    <div class="product">
+        <div class="discount">-29% DISCOUNT</div>
+
+        <div class="product-name">
+            DRAG SHOT 70%
+        </div>
+
+        <div class="product-desc">
+            Version 2 • OB55 • Premium
+        </div>
+
+        <div class="price-box">
+            <div class="old-price">40K</div>
+            <div class="new-price">30K</div>
+        </div>
+
+        <a class="buy"
+           href="https://wa.me/6285794072560?text=Halo%20JekSetting,%20saya%20mau%20beli%20DRAG%20SHOT%2070%%20-%2025K">
+           💬 BELI SEKARANG
+        </a>
+    </div>
+
+    <!-- PRODUCT 4 -->
+    <div class="product">
+        <div class="discount">-11% DISCOUNT</div>
+
+        <div class="product-name">
+            DRAG SHOT 80%
+        </div>
+
+        <div class="product-desc">
+            Version 2 • OB55 • Premium
+        </div>
+
+        <div class="price-box">
+            <div class="old-price">65K</div>
+            <div class="new-price">50K</div>
+        </div>
+
+        <a class="buy"
+           href="https://wa.me/6285794072560?text=Halo%20JekSetting,%20saya%20mau%20beli%20DRAG%20SHOT%2080%%20-%2040K">
+           💬 BELI SEKARANG
+        </a>
+    </div>
+
+    <!-- PRODUCT 5 -->
+    <div class="product">
+        <div class="discount">-21% DISCOUNT</div>
+
+        <div class="product-name">
+            DRAG SHOT 90%
+        </div>
+
+        <div class="product-desc">
+            Version 2 • OB55 • Premium
+        </div>
+
+        <div class="price-box">
+            <div class="old-price">100K</div>
+            <div class="new-price">80K</div>
+        </div>
+
+        <a class="buy"
+           href="https://wa.me/6285794072560?text=Halo%20JekSetting,%20saya%20mau%20beli%20DRAG%20SHOT%2090%%20-%2055K">
+           💬 BELI SEKARANG
+        </a>
+    </div>
+
+</section>
+
+<!-- INJEKCIT -->
+<section>
+
+    <div class="section-title">
+        <h2>☠ APP INJEKCIT VERSION 2</h2>
+        <div class="line"></div>
+    </div>
+
+    <!-- BASIC -->
+    <div class="product">
+        <div class="discount">-25% DISCOUNT</div>
+
+        <div class="product-name">
+            APP INJEKCIT BASIC V2
+        </div>
+
+        <div class="product-desc">
+            • Permanen • Premium
+        </div>
+
+        <div class="price-box">
+            <div class="old-price">20K</div>
+            <div class="new-price">15K</div>
+        </div>
+
+        <a class="buy"
+           href="https://wa.me/6285794072560?text=Halo%20JekSetting,%20saya%20mau%20beli%20APP%20INJEKCIT%20BASIC%20V2%20-%2015K">
+           💬 BELI SEKARANG
+        </a>
+    </div>
+
+    <!-- MEDIUM -->
+    <div class="product">
+        <div class="discount">-30% DISCOUNT</div>
+
+        <div class="product-name">
+            APP INJEKCIT MEDIUM V2
+        </div>
+
+        <div class="product-desc">
+            • Permanen • Premium
+        </div>
+
+        <div class="price-box">
+            <div class="old-price">50K</div>
+            <div class="new-price">35K</div>
+        </div>
+
+        <a class="buy"
+           href="https://wa.me/6285794072560?text=Halo%20JekSetting,%20saya%20mau%20beli%20APP%20INJEKCIT%20MEDIUM%20V2%20-%2035K">
+           💬 BELI SEKARANG
+        </a>
+    </div>
+
+    <!-- EXTREME -->
+    <div class="product">
+        <div class="discount">-33% DISCOUNT</div>
+
+        <div class="product-name">
+            APP INJEKCIT EXTREME V2
+        </div>
+
+        <div class="product-desc">
+            • Permanen • Premium
+        </div>
+
+        <div class="price-box">
+            <div class="old-price">90K</div>
+            <div class="new-price">60K</div>
+        </div>
+
+        <a class="buy"
+           href="https://wa.me/6285794072560?text=Halo%20JekSetting,%20saya%20mau%20beli%20APP%20INJEKCIT%20EXTREME%20V2%20-%2060K">
+           💬 BELI SEKARANG
+        </a>
+    </div>
+
+    <!-- PRIME -->
+    <div class="product">
+        <div class="discount">-33% DISCOUNT</div>
+
+        <div class="product-name">
+            APP INJEKCIT PRIME V2
+        </div>
+
+        <div class="product-desc">
+            • Permanen • Premium
+        </div>
+
+        <div class="price-box">
+            <div class="old-price">150K</div>
+            <div class="new-price">100K</div>
+        </div>
+
+        <a class="buy"
+           href="https://wa.me/6285794072560?text=Halo%20JekSetting,%20saya%20mau%20beli%20APP%20INJEKCIT%20PRIME%20V2%20-%20100K">
+           💬 BELI SEKARANG
+        </a>
+    </div>
+
+</section>
+
+<!-- INFO -->
+<div class="info">
+    <div class="info-title">
+        ⚠ INFORMATION
+    </div>
+
+    <p>
+        Semua harga yang ditampilkan merupakan harga promo.
+        Produk tersedia selama masih tersedia. Untuk pembelian
+        dan informasi lebih lanjut, silakan hubungi admin
+        melalui WhatsApp.
+    </p>
+</div>
+
+<footer>
+    ☠ <span>JEKSETTING</span> © 2026 • INJEKCIT TEAM SETTING ☠
+</footer>
+
+</body>
+</html>
