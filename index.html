@@ -5,371 +5,990 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="theme-color" content="#10001b">
 <title>DRIPCLIENT STORE</title>
+
 <style>
-:root{--bg:#0b0012;--panel:#160024;--panel2:#210033;--border:#3d1058;--purple:#d000ff;--purple2:#9e00d8;--text:#f8eaff;--muted:#c4a8d4;--green:#00ef9b;--yellow:#ffd52a}
+:root{
+  --bg:#0b0012;
+  --panel:#160024;
+  --border:#3d1058;
+  --purple:#d000ff;
+  --text:#f8eaff;
+  --muted:#c4a8d4;
+  --green:#00ef9b;
+  --red:#ff3333;
+}
+
 *{box-sizing:border-box}
 html{scroll-behavior:smooth}
-body{margin:0;background:var(--bg);color:var(--text);font-family:Arial,Helvetica,sans-serif;min-height:100vh}
-body:before{content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;background-image:linear-gradient(#7e16a51a 1px,transparent 1px),linear-gradient(90deg,#7e16a51a 1px,transparent 1px),radial-gradient(ellipse at 50% 0%,#5b007b55,transparent 55%);background-size:26px 26px,26px 26px,auto}
-header{position:sticky;top:0;z-index:10;background:#100019ed;border-bottom:1px solid #4b1262;box-shadow:0 5px 30px #b000ff18;backdrop-filter:blur(14px)}
-.nav{max-width:1100px;margin:auto;padding:13px 16px;display:flex;align-items:center;justify-content:space-between;gap:12px}
-.brand{display:flex;align-items:center;gap:10px;font-weight:900;font-size:21px;letter-spacing:-.7px}
-.logo{width:42px;height:42px;border-radius:12px;display:grid;place-items:center;background:linear-gradient(145deg,#4e0876,#1c0030);border:1px solid #a500e8;box-shadow:0 0 18px #b000ff45;font-size:23px}
+
+body{
+  margin:0;
+  background:var(--bg);
+  color:var(--text);
+  font-family:Arial,Helvetica,sans-serif;
+  min-height:100vh;
+}
+
+body:before{
+  content:"";
+  position:fixed;
+  inset:0;
+  z-index:-1;
+  pointer-events:none;
+  background-image:
+    linear-gradient(#7e16a51a 1px,transparent 1px),
+    linear-gradient(90deg,#7e16a51a 1px,transparent 1px),
+    radial-gradient(ellipse at 50% 0%,#5b007b55,transparent 55%);
+  background-size:26px 26px,26px 26px,auto;
+}
+
+/* HEADER */
+header{
+  position:sticky;
+  top:0;
+  z-index:10;
+  background:#100019ed;
+  border-bottom:1px solid #4b1262;
+  box-shadow:0 5px 30px #b000ff18;
+  backdrop-filter:blur(14px);
+}
+
+.nav{
+  max-width:1100px;
+  margin:auto;
+  padding:13px 16px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:12px;
+}
+
+.brand{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  font-weight:900;
+  font-size:19px;
+}
+
 .brand span{color:var(--purple)}
-.menu{width:48px;height:48px;border:1px solid #59147b;background:#25003b;color:white;border-radius:16px;font-size:24px;cursor:pointer;box-shadow:0 0 20px #b000ff26}
-main{max-width:1100px;margin:auto;padding:26px 14px 110px}
-.intro{text-align:center;padding:25px 8px 22px}
-.pill{display:inline-block;border:1px solid #65158a;background:#29003d;color:#d875ff;padding:7px 12px;border-radius:20px;font-size:10px;letter-spacing:1.5px;font-weight:bold}
-h1{font-size:clamp(27px,6vw,42px);margin:16px 0 8px;letter-spacing:1px}
-h1 span{color:var(--purple);text-shadow:0 0 20px #d000ff77}
-.intro p{color:var(--muted);font-size:13px;line-height:1.7;margin:0}
-.products{display:grid;gap:22px;margin-top:20px}
-.product{display:grid;grid-template-columns:135px minmax(0,1fr);gap:17px;padding:18px;background:linear-gradient(130deg,#190027f5,#100019f5);border:1px solid var(--border);border-radius:28px;box-shadow:0 0 22px #b000ff0c;position:relative;overflow:hidden;transition:.2s}
-.product:hover{border-color:#9e24d1;box-shadow:0 0 28px #c000ff18}
-.visual{min-width:0}
-.art {
-    width: 100%;
-    aspect-ratio: 1 / 1;
-    height: auto;
-    position: relative;
-    overflow: hidden;
-    border-radius: 17px;
-    border: 1px solid #5e1681;
-    background: #160020;
-    box-shadow: inset 0 0 22px #d000ff28;
+
+.logo{
+  width:42px;
+  height:42px;
+  flex-shrink:0;
+  border-radius:12px;
+  display:grid;
+  place-items:center;
+  background:linear-gradient(145deg,#4e0876,#1c0030);
+  border:1px solid #a500e8;
+  box-shadow:0 0 18px #b000ff45;
+  font-size:23px;
 }
 
-.art img {
-    display: block;
-    width: 100%;
-    height: 100%;
-    object-fit: contain;
-    object-position: center;
-    border-radius: 16px;
+.menu{
+  width:45px;
+  height:45px;
+  border:1px solid #59147b;
+  background:#25003b;
+  color:white;
+  border-radius:14px;
+  font-size:23px;
+  cursor:pointer;
 }
-.art:before{content:"";position:absolute;inset:8px;border:1px dashed #d94cff55;border-radius:12px}
-.art strong{position:relative;z-index:1;color:#fff;font-size:19px;line-height:1.05;text-shadow:2px 3px 0 #5b0084,0 0 12px #f000ff;font-weight:1000;letter-spacing:-.5px}
-.art strong em{display:block;font-style:normal;color:#ffe65d;font-size:17px;margin-top:4px}
-.free{position:absolute;right:0;bottom:0;background:#fff;color:#111;border-radius:8px 0 0 0;font-size:9px;font-weight:900;padding:5px}
-.duration-tag,.download{width:100%;border-radius:9px;text-align:center;padding:10px 4px;margin-top:9px;font-size:10px;font-weight:800;letter-spacing:.4px}
-.duration-tag{background:#40005e;border:1px solid #61008b;color:#dc76ff}
-.download{display:block;text-decoration:none;color:#fff;background:#09000f;border:1px solid #3b184b;cursor:pointer}
-.details{min-width:0}
-.topline{display:flex;align-items:center;justify-content:space-between;gap:8px;margin:3px 0 14px}
-.type{font-family:monospace;font-size:10px;letter-spacing:.8px;color:#d365ff;border:1px solid #5e167c;background:#270039;padding:7px 9px;border-radius:20px;white-space:nowrap}
-.price{font-family:monospace;font-size:17px;font-weight:900;color:#d000ff;text-shadow:0 0 12px #d000ff55;white-space:nowrap}
-h2{font-size:18px;margin:0 0 10px}
-.desc{font-size:13px;color:var(--muted);line-height:1.6;margin:0 0 12px}
-.stats{display:flex;align-items:center;flex-wrap:wrap;gap:10px;font-size:12px;color:#b68ad1;margin-bottom:16px}
-.rating{color:#ffd53c;font-weight:bold}
-.status{display:inline-flex;align-items:center;gap:7px;padding:8px 12px;border-radius:20px;font-size:12px;font-weight:bold;margin-bottom:12px}
-.status:before{content:"";width:8px;height:8px;border-radius:50%;background:currentColor}
-.on{color:var(--green);background:#003c2d66;border:1px solid #087c5b}
-.off {
-    color: #ff3333;
-    background: #ff000022;
-    border: 1px solid #ff0000;
-    box-shadow: 0 0 8px #ff000055;
-  }
-.buy{display:flex;justify-content:center;align-items:center;gap:9px;width:100%;min-height:49px;border:0;border-radius:13px;background:linear-gradient(100deg,#c000f5,#e000ff);color:#21002c;font-weight:900;font-size:13px;text-decoration:none;cursor:pointer;box-shadow:0 0 20px #d000ff2b;transition:.2s}
-.buy:hover{filter:brightness(1.1);transform:translateY(-1px)}
-footer{text-align:center;padding:24px 14px;border-top:1px solid #351044;color:#987ba9;font-size:11px;line-height:1.8}
-footer b{color:#d000ff}
-.floating{position:fixed;right:16px;bottom:24px;z-index:20;display:flex;flex-direction:column;gap:12px}
-.float-btn{width:56px;height:56px;border-radius:50%;display:grid;place-items:center;text-decoration:none;border:1px solid #a0ffbd;background:#16cb70;color:white;font-size:27px;box-shadow:0 0 20px #00ff7a40;cursor:pointer}
-.float-btn.theme{background:#180024;border-color:#8c36aa;color:#ffdd4e;font-size:23px}
-.notice{display:none;margin-top:15px;padding:12px;border:1px solid #6d2485;border-radius:12px;color:#e8c4ff;background:#210033;font-size:12px;line-height:1.6}
-@media(min-width:760px){main{padding-left:24px;padding-right:24px}.products{grid-template-columns:1fr 1fr}.product{grid-template-columns:112px minmax(0,1fr);padding:15px;gap:13px}.art{height:112px}.topline{align-items:flex-start}.price{font-size:15px}.type{font-size:9px}.brand{font-size:24px}}
-@media(max-width:420px){main{padding-left:9px;padding-right:9px}.product{grid-template-columns:106px minmax(0,1fr);gap:11px;padding:12px;border-radius:23px}.art{height:106px}.art strong{font-size:16px}.art strong em{font-size:14px}.topline{align-items:flex-start;flex-direction:column;gap:7px;margin-bottom:12px}.price{font-size:16px}.type{font-size:9px}.desc{font-size:12px}.stats{gap:7px;font-size:11px}.buy{font-size:11px;min-height:45px}.duration-tag,.download{font-size:9px}.brand{font-size:18px}}
-body.light{--bg:#f6edff;--panel:#fff;--panel2:#f4e2ff;--border:#d8b0ee;--text:#260033;--muted:#72527f}
-body.light:before{background-image:linear-gradient(#7e16a51a 1px,transparent 1px),linear-gradient(90deg,#7e16a51a 1px,transparent 1px),radial-gradient(ellipse at 50% 0%,#d9a2f655,transparent 55%)}
-body.light header{background:#fff0ffed}
-body.light .product{background:linear-gradient(130deg,#fff,#f7eaff)}
-body.light .price-item,body.light .download{background:#f6eaff;color:#260033}
-body.light .menu{background:#f4e2ff;color:#260033}
-body.light .float-btn.theme{background:#fff}
 
-/* MODAL PILIH DURASI */
-.modal-backdrop{position:fixed;inset:0;background:#000b;backdrop-filter:blur(7px);z-index:50;display:none;align-items:flex-end;justify-content:center}
-.modal-backdrop.show{display:flex}
-.modal{width:100%;max-width:760px;max-height:88dvh;overflow:auto;background:#170024;border:1px solid #4a1264;border-radius:28px 28px 0 0;box-shadow:0 -12px 45px #b000ff20;transform:translateY(100%);transition:transform .28s ease}
-.modal-backdrop.show .modal{transform:translateY(0)}
-.modal-handle{width:48px;height:4px;background:#4d1762;border-radius:10px;margin:13px auto 20px}
-.steps{display:flex;justify-content:center;gap:55px;padding:0 16px 20px;border-bottom:1px solid #351044}
-.step{display:flex;flex-direction:column;align-items:center;gap:7px;color:#9e75b6;font-size:11px;font-weight:bold}
-.step-num{width:38px;height:38px;border-radius:50%;display:grid;place-items:center;background:#0b0012;border:1px solid #45125b;color:#bb8ad0;font-size:15px}
-.step.active{color:#d94aff}.step.active .step-num{background:#d000ff;color:#21002c;border-color:#d000ff;box-shadow:0 0 18px #d000ff50}
-.modal-content{padding:23px 16px 26px}
-.modal-head{display:flex;justify-content:space-between;align-items:flex-start;gap:12px;margin-bottom:20px}
-.modal-eyebrow{font-size:12px;color:#d000ff;letter-spacing:2px;font-weight:900;margin-bottom:10px}
-.modal-head h3{font-size:21px;margin:0}
-.close-modal{width:40px;height:40px;border-radius:13px;background:#260039;border:1px solid #54116d;color:#d99bff;font-size:23px;cursor:pointer}
-.duration-options{display:grid;gap:10px}
-.duration-option{display:flex;align-items:center;gap:12px;width:100%;padding:13px;background:#26003b;border:1px solid #42105c;border-radius:17px;color:#fff;text-align:left;cursor:pointer;transition:.18s}
-.duration-option.selected{border-color:#d000ff;background:#33004a;box-shadow:0 0 16px #d000ff20}
-.clock-icon{width:40px;height:40px;flex-shrink:0;display:grid;place-items:center;border-radius:11px;background:#0d0016;color:#d000ff;font-size:19px}
-.duration-info{flex:1;min-width:0}
-.duration-info b{display:block;font-size:14px;margin-bottom:5px}
-.duration-info small{display:block;color:#b58acb;font-size:12px;line-height:1.4}
-.stock{display:inline-block;background:#09000f;color:#df48ff;padding:2px 5px;border-radius:4px;font-size:10px;margin-left:5px;font-weight:bold}
-.option-price{font-weight:900;color:#d000ff;font-size:14px;white-space:nowrap}
-.option-arrow{color:#c34aff;font-size:20px;margin-left:1px}
-.modal-next{width:100%;border:0;border-radius:13px;padding:15px;margin-top:17px;background:linear-gradient(100deg,#bd00f0,#e000ff);color:#21002c;font-size:13px;font-weight:900;cursor:pointer}
-.confirm-box{padding:16px;background:#26003b;border:1px solid #53116e;border-radius:16px;line-height:1.9;font-size:13px;color:#cda9df}
-.confirm-box b{color:#fff}.confirm-total{display:flex;justify-content:space-between;align-items:center;margin-top:12px;padding-top:12px;border-top:1px solid #512064;font-size:14px}.confirm-total strong{color:#df37ff;font-size:20px}
-.modal-back{background:transparent;border:0;color:#c99ade;margin-top:15px;padding:10px;cursor:pointer;width:100%}
-body.modal-open{overflow:hidden}
-@media(min-width:650px){.modal-backdrop{align-items:center;padding:20px}.modal{border-radius:28px;max-height:85vh}.modal-content{padding:26px}.duration-options{gap:12px}}
+/* KONTEN */
+main{
+  max-width:1100px;
+  margin:auto;
+  padding:20px 12px 110px;
+}
 
-</style>
-</head>
-<body>
-<header>
-  <div class="nav">
-    <div class="brand"><div class="logo">X</div><div><span></span>XEON OFFICIAL STORE</div></div>
-    <button class="menu" aria-label="Menu" onclick="document.getElementById('produk').scrollIntoView({behavior:'smooth'})">☰</button>
-  </div>
-</header>
+.intro{
+  text-align:center;
+  padding:18px 8px 16px;
+}
 
-<main>
-  <section class="intro">
-    <div class="pill">✦ PREMIUM DIGITAL STORE ✦</div>
-    <h1><span>DRIP CLIENT</span></h1>
-  </section>
+.pill{
+  display:inline-block;
+  border:1px solid #65158a;
+  background:#29003d;
+  color:#d875ff;
+  padding:7px 12px;
+  border-radius:20px;
+  font-size:10px;
+  letter-spacing:1.5px;
+  font-weight:bold;
+}
 
-  <style>
-/* GALERI FOTO */
+h1{
+  font-size:clamp(27px,6vw,42px);
+  margin:15px 0 8px;
+}
+
+h1 span{
+  color:var(--purple);
+  text-shadow:0 0 20px #d000ff77;
+}
+
+.intro p{
+  color:var(--muted);
+  font-size:13px;
+  line-height:1.7;
+}
+
+/* GALERI */
 .gallery-section{
-  margin:10px 0;
-  padding:0 10px;
+  margin:5px 0 14px;
+  padding:0 2px;
+  position:relative;
+  z-index:1;
 }
 
 .gallery-title{
-  color:#fff;
-  font-size:20px;
+  color:white;
+  font-size:19px;
   font-weight:900;
-  margin-bottom:6px;
+  margin-bottom:5px;
 }
 
 .gallery-subtitle{
   color:#c9a5d8;
-  font-size:12px;
-  margin-bottom:15px;
+  font-size:11px;
+  margin-bottom:10px;
 }
 
 .gallery-container{
   display:flex;
-  gap:14px;
+  gap:8px;
   overflow-x:auto;
   scroll-snap-type:x mandatory;
   scrollbar-width:none;
-  padding-bottom:8px;
+  -webkit-overflow-scrolling:touch;
+  padding-bottom:5px;
 }
 
-.gallery-container::-webkit-scrollbar{
-  display:none;
-}
+.gallery-container::-webkit-scrollbar{display:none}
 
 .gallery-card{
-  flex:0 0 90%;
+  flex:0 0 85%;
   max-width:400px;
+  min-width:0;
   scroll-snap-align:start;
   background:#160024;
   border:1px solid #7200a0;
-  border-radius:20px;
+  border-radius:17px;
   overflow:hidden;
-  box-shadow:0 0 15px #d000ff25;
 }
 
 .gallery-card img{
   display:block;
   width:100%;
-  height:180px;
+  height:155px;
   object-fit:cover;
 }
 
 .gallery-caption{
-  padding:12px;
-  color:#fff;
-  font-size:13px;
+  padding:10px;
+  color:white;
+  font-size:12px;
   font-weight:bold;
 }
 
 .gallery-caption span{
   display:block;
-  color:#d000ff;
+  color:var(--purple);
+  font-size:10px;
+  margin-top:4px;
+}
+
+/* KARTU PRODUK */
+.products{
+  display:grid;
+  gap:16px;
+  margin-top:10px;
+}
+
+.product{
+  display:grid;
+  grid-template-columns:100px minmax(0,1fr);
+  gap:12px;
+  padding:12px;
+  background:linear-gradient(130deg,#190027f5,#100019f5);
+  border:1px solid var(--border);
+  border-radius:22px;
+  position:relative;
+}
+
+.visual,.details{
+  min-width:0;
+  position:relative;
+}
+
+.art{
+  width:100%;
+  aspect-ratio:1/1;
+  overflow:hidden;
+  border-radius:15px;
+  border:1px solid #5e1681;
+  background:#160020;
+  box-shadow:inset 0 0 22px #d000ff28;
+}
+
+.art img{
+  display:block;
+  width:100%;
+  height:100%;
+  object-fit:contain;
+  object-position:center;
+}
+
+.duration-tag,.download{
+  width:100%;
+  display:block;
+  border-radius:9px;
+  text-align:center;
+  padding:10px 3px;
+  margin-top:8px;
+  font-size:9px;
+  font-weight:800;
+}
+
+.duration-tag{
+  background:#40005e;
+  border:1px solid #61008b;
+  color:#dc76ff;
+}
+
+.download{
+  text-decoration:none;
+  color:white;
+  background:#09000f;
+  border:1px solid #3b184b;
+}
+
+.topline{
+  display:flex;
+  flex-direction:column;
+  align-items:flex-start;
+  gap:7px;
+  margin:3px 0 12px;
+}
+
+.type{
+  font-family:monospace;
+  font-size:9px;
+  color:#d365ff;
+  border:1px solid #5e167c;
+  background:#270039;
+  padding:6px 7px;
+  border-radius:20px;
+  white-space:nowrap;
+}
+
+.price{
+  font-family:monospace;
+  font-size:16px;
+  font-weight:900;
+  color:var(--purple);
+}
+
+h2{
+  font-size:17px;
+  margin:0 0 9px;
+}
+
+.desc{
+  font-size:12px;
+  color:var(--muted);
+  line-height:1.6;
+  margin:0 0 10px;
+}
+
+.stats{
+  display:flex;
+  align-items:center;
+  flex-wrap:wrap;
+  gap:7px;
   font-size:11px;
-  margin-top:5px;
+  color:#b68ad1;
+  margin-bottom:12px;
+}
+
+.rating{
+  color:#ffd53c;
+  font-weight:bold;
+}
+
+.status{
+  display:inline-flex;
+  align-items:center;
+  gap:7px;
+  padding:7px 10px;
+  border-radius:20px;
+  font-size:11px;
+  font-weight:bold;
+  margin-bottom:10px;
+}
+
+.status:before{
+  content:"";
+  width:7px;
+  height:7px;
+  border-radius:50%;
+  background:currentColor;
+}
+
+.on{
+  color:var(--green);
+  background:#003c2d66;
+  border:1px solid #087c5b;
+}
+
+.off{
+  color:var(--red);
+  background:#ff000022;
+  border:1px solid var(--red);
+  box-shadow:0 0 8px #ff000055;
+}
+
+/* TOMBOL BELI */
+.buy{
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  width:100%;
+  min-height:45px;
+  padding:10px 4px;
+  border:0;
+  border-radius:12px;
+  background:linear-gradient(100deg,#c000f5,#e000ff);
+  color:#21002c;
+  font-weight:900;
+  font-size:11px;
+  cursor:pointer;
+  position:relative;
+  z-index:2;
+  pointer-events:auto;
+  touch-action:manipulation;
+  -webkit-tap-highlight-color:transparent;
+}
+
+/* MODAL */
+.modal-backdrop{
+  position:fixed;
+  inset:0;
+  background:#000b;
+  backdrop-filter:blur(7px);
+  z-index:9999;
+  display:none;
+  align-items:flex-end;
+  justify-content:center;
+}
+
+.modal-backdrop.show{display:flex}
+
+.modal{
+  width:100%;
+  max-width:760px;
+  max-height:88vh;
+  max-height:88dvh;
+  overflow:auto;
+  background:#170024;
+  border:1px solid #4a1264;
+  border-radius:25px 25px 0 0;
+  box-shadow:0 -12px 45px #b000ff20;
+}
+
+.modal-handle{
+  width:48px;
+  height:4px;
+  background:#4d1762;
+  border-radius:10px;
+  margin:13px auto 20px;
+}
+
+.steps{
+  display:flex;
+  justify-content:center;
+  gap:55px;
+  padding:0 16px 20px;
+  border-bottom:1px solid #351044;
+}
+
+.step{
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  gap:7px;
+  color:#9e75b6;
+  font-size:11px;
+  font-weight:bold;
+}
+
+.step-num{
+  width:38px;
+  height:38px;
+  border-radius:50%;
+  display:grid;
+  place-items:center;
+  background:#0b0012;
+  border:1px solid #45125b;
+  color:#bb8ad0;
+}
+
+.step.active{color:#d94aff}
+
+.step.active .step-num{
+  background:#d000ff;
+  color:#21002c;
+  border-color:#d000ff;
+}
+
+.modal-content{padding:22px 15px 25px}
+
+.modal-head{
+  display:flex;
+  justify-content:space-between;
+  align-items:flex-start;
+  gap:12px;
+  margin-bottom:20px;
+}
+
+.modal-eyebrow{
+  font-size:12px;
+  color:var(--purple);
+  letter-spacing:1px;
+  font-weight:900;
+  margin-bottom:10px;
+}
+
+.modal-head h3{
+  font-size:21px;
+  margin:0;
+}
+
+.close-modal{
+  width:40px;
+  height:40px;
+  border-radius:13px;
+  background:#260039;
+  border:1px solid #54116d;
+  color:#d99bff;
+  font-size:23px;
+  cursor:pointer;
+}
+
+.duration-options{
+  display:grid;
+  gap:10px;
+}
+
+.duration-option{
+  display:flex;
+  align-items:center;
+  gap:9px;
+  width:100%;
+  padding:12px 9px;
+  background:#26003b;
+  border:1px solid #42105c;
+  border-radius:15px;
+  color:white;
+  text-align:left;
+  cursor:pointer;
+}
+
+.duration-option.selected{
+  border-color:var(--purple);
+  background:#33004a;
+}
+
+.clock-icon{
+  width:35px;
+  height:35px;
+  flex-shrink:0;
+  display:grid;
+  place-items:center;
+  border-radius:11px;
+  background:#0d0016;
+  color:var(--purple);
+  font-size:19px;
+}
+
+.duration-info{
+  flex:1;
+  min-width:0;
+}
+
+.duration-info b{
+  display:block;
+  font-size:13px;
+  margin-bottom:5px;
+}
+
+.duration-info small{
+  display:block;
+  color:#b58acb;
+  font-size:11px;
+  line-height:1.5;
+}
+
+.stock{
+  display:inline-block;
+  background:#09000f;
+  color:#df48ff;
+  padding:2px 5px;
+  border-radius:4px;
+  font-size:10px;
+  margin-left:3px;
+}
+
+.option-price{
+  font-weight:900;
+  color:var(--purple);
+  font-size:12px;
+  white-space:nowrap;
+}
+
+.option-arrow{
+  color:#c34aff;
+  font-size:20px;
+}
+
+.modal-next{
+  width:100%;
+  border:0;
+  border-radius:13px;
+  padding:15px 10px;
+  margin-top:17px;
+  background:linear-gradient(100deg,#bd00f0,#e000ff);
+  color:#21002c;
+  font-size:12px;
+  font-weight:900;
+  cursor:pointer;
+  touch-action:manipulation;
+}
+
+.confirm-box{
+  padding:15px;
+  background:#26003b;
+  border:1px solid #53116e;
+  border-radius:16px;
+  line-height:1.9;
+  font-size:13px;
+  color:#cda9df;
+  overflow-wrap:anywhere;
+}
+
+.confirm-box b{color:white}
+
+.confirm-total{
+  display:flex;
+  justify-content:space-between;
+  gap:10px;
+  margin-top:12px;
+  padding-top:12px;
+  border-top:1px solid #512064;
+}
+
+.confirm-total strong{
+  color:#df37ff;
+  font-size:19px;
+}
+
+.modal-back{
+  background:transparent;
+  border:0;
+  color:#c99ade;
+  margin-top:15px;
+  padding:10px;
+  cursor:pointer;
+  width:100%;
+}
+
+/* FOOTER & TOMBOL MELAYANG */
+footer{
+  text-align:center;
+  padding:24px 14px;
+  border-top:1px solid #351044;
+  color:#987ba9;
+  font-size:11px;
+  line-height:1.8;
+}
+
+footer b{color:var(--purple)}
+
+.floating{
+  position:fixed;
+  right:16px;
+  bottom:24px;
+  z-index:100;
+  display:flex;
+  flex-direction:column;
+  gap:12px;
+}
+
+.float-btn{
+  width:53px;
+  height:53px;
+  border-radius:50%;
+  display:grid;
+  place-items:center;
+  text-decoration:none;
+  border:1px solid #a0ffbd;
+  background:#16cb70;
+  color:white;
+  font-size:25px;
+  cursor:pointer;
+}
+
+.float-btn.theme{
+  background:#180024;
+  border-color:#8c36aa;
+  color:#ffdd4e;
+}
+
+/* TEMA TERANG */
+body.light{
+  --bg:#f6edff;
+  --border:#d8b0ee;
+  --text:#260033;
+  --muted:#72527f;
+}
+
+body.light header{background:#fff0ffed}
+body.light .product{background:linear-gradient(130deg,#fff,#f7eaff)}
+body.light .download{background:#f6eaff;color:#260033}
+body.light .menu{background:#f4e2ff;color:#260033}
+body.light .float-btn.theme{background:#fff}
+
+@media(min-width:650px){
+  .modal-backdrop{
+    align-items:center;
+    padding:20px;
+  }
+
+  .modal{border-radius:25px;max-height:85vh}
+  .modal-content{padding:26px}
+}
+
+@media(min-width:760px){
+  main{padding-left:24px;padding-right:24px}
+  .products{grid-template-columns:1fr 1fr}
+
+  .product{
+    grid-template-columns:112px minmax(0,1fr);
+    padding:15px;
+    gap:13px;
+  }
+
+  .topline{
+    flex-direction:row;
+    align-items:flex-start;
+    justify-content:space-between;
+  }
+
+  .price{font-size:15px}
+  .gallery-card{flex-basis:48%}
+}
+
+@media(max-width:360px){
+  .product{
+    grid-template-columns:88px minmax(0,1fr);
+    gap:9px;
+    padding:9px;
+  }
+
+  .brand{font-size:15px}
+  .type{font-size:8px}
+  .price{font-size:14px}
+  h2{font-size:15px}
+  .buy{font-size:10px}
 }
 </style>
+</head>
 
-<!-- GALERI FOTO -->
-<section class="gallery-section">
-  <div class="gallery-title">GALERI DRIPCLIENT</div>
-  <div class="gallery-subtitle">
-  </div>
+<body>
 
-  <div class="gallery-container">
-
-    <div class="gallery-card">
-      <img src="wir.jpg" alt="Foto DRIPCLIENT 1">
-      <div class="gallery-caption">
-        DRIPCLIENT WIRE
-        <span>✦ ANDROID NO ROOT</span>
-      </div>
+<header>
+  <div class="nav">
+    <div class="brand">
+      <div class="logo">X</div>
+      <div><span>XEON</span> OFFICIAL STORE</div>
     </div>
 
-    <div class="gallery-card">
-      <img src="mod.jpg" alt="Foto DRIPCLIENT 2">
-      <div class="gallery-caption">
-        DRIPCLIENT APKMOD
-        <span>✦ ANDROID NO ROOT</span>
+    <button type="button" class="menu"
+      onclick="document.getElementById('produk').scrollIntoView({behavior:'smooth'})">☰</button>
+  </div>
+</header>
+
+<main>
+
+  <section class="intro">
+    <div class="pill">✦ PREMIUM DIGITAL STORE ✦</div>
+    <h1><span>DRIP CLIENT</span></h1>
+    <p>PILIH PRODUK DAN DURASI YANG KAMU BUTUHKAN.<br>
+    ORDER MUDAH • PROSES MELALUI WHATSAPP</p>
+  </section>
+
+  <!-- GALERI FOTO -->
+  <section class="gallery-section">
+    <div class="gallery-title">GALERI DRIPCLIENT</div>
+    <div class="gallery-subtitle">GESER UNTUK MELIHAT FOTO LAINNYA</div>
+
+    <div class="gallery-container">
+      <div class="gallery-card">
+        <img src="wir.jpg" alt="DRIPCLIENT WIRE" loading="lazy">
+        <div class="gallery-caption">
+          DRIPCLIENT WIRE
+          <span>✦ ANDROID NON ROOT</span>
+        </div>
+      </div>
+
+      <div class="gallery-card">
+        <img src="mod.jpg" alt="DRIPCLIENT APKMOD" loading="lazy">
+        <div class="gallery-caption">
+          DRIPCLIENT APKMOD
+          <span>✦ ANDROID NON ROOT</span>
+        </div>
       </div>
     </div>
-  </div>
-</section>
-  
+  </section>
+
+  <!-- PRODUK -->
   <section class="products" id="produk">
+
     <article class="product">
       <div class="visual">
         <div class="art">
-    <img src="wire.png" alt="DRIP WIRE">
+          <img src="wire.png" alt="DRIP WIRE">
         </div>
         <div class="duration-tag">◷ 3 DURASI</div>
         <a class="download" href="#" onclick="downloadInfo('WIRE');return false;">⇩ UNDUH APK</a>
       </div>
+
       <div class="details">
-        <div class="topline"><span class="type">ANDROID NON ROOT</span><span class="price">Rp 7.000</span></div>
+        <div class="topline">
+          <span class="type">ANDROID NON ROOT</span>
+          <span class="price">Rp 7.000</span>
+        </div>
         <h2>DRIP WIRE</h2>
         <p class="desc">Kompatibel dengan Android dan iPhone (iOS).</p>
         <div class="stats"><span class="rating">★ 5.0</span><span>• 4.082+ Terjual</span></div>
         <div class="status on">Online</div>
-        <button class="buy" onclick="openOrder('WIRE')">🛒 BELI SEKARANG</button>
+
+        <button type="button" class="buy" onclick="openOrder('WIRE')">
+          🛒 BELI SEKARANG
+        </button>
       </div>
     </article>
 
     <article class="product">
       <div class="visual">
         <div class="art">
-    <img src="apkmod.png" alt="DRIP APKMOD">
+          <img src="apkmod.png" alt="DRIP APKMOD">
         </div>
         <div class="duration-tag">◷ 3 DURASI</div>
         <a class="download" href="#" onclick="downloadInfo('APKMOD');return false;">⇩ UNDUH APK</a>
       </div>
+
       <div class="details">
-        <div class="topline"><span class="type">ANDROID NON ROOT</span><span class="price">Rp 10.000</span></div>
+        <div class="topline">
+          <span class="type">ANDROID NON ROOT</span>
+          <span class="price">Rp 10.000</span>
+        </div>
         <h2>DRIP APKMOD</h2>
         <p class="desc">Pilih masa aktif paket yang tersedia.</p>
         <div class="stats"><span class="rating">★ 4.9</span><span>• 3.890+ Terjual</span></div>
         <div class="status on">Online</div>
-        <button class="buy" onclick="openOrder('APKMOD')">🛒 BELI SEKARANG</button>
+
+        <button type="button" class="buy" onclick="openOrder('APKMOD')">
+          🛒 BELI SEKARANG
+        </button>
       </div>
     </article>
 
     <article class="product">
       <div class="visual">
         <div class="art">
-    <img src="proxy.png" alt="DRIP PROXY">
+          <img src="proxy.png" alt="DRIP PROXY">
         </div>
         <div class="duration-tag">◷ 3 DURASI</div>
         <a class="download" href="#" onclick="downloadInfo('PROXY');return false;">⇩ UNDUH APK</a>
       </div>
+
       <div class="details">
-        <div class="topline"><span class="type">ANDROID NON ROOT</span><span class="price">Rp 10.000</span></div>
+        <div class="topline">
+          <span class="type">ANDROID NON ROOT</span>
+          <span class="price">Rp 10.000</span>
+        </div>
         <h2>DRIP PROXY</h2>
         <p class="desc"><i>DRIP CLIENT — Next Level Control.</i></p>
         <div class="stats"><span class="rating">★ 4.8</span><span>• 3.980+ Terjual</span></div>
         <div class="status off">Offline</div>
-        <button class="buy" onclick="openOrder('PROXY')">🛒 BELI SEKARANG</button>
+
+        <button type="button" class="buy" onclick="openOrder('PROXY')">
+          🛒 BELI SEKARANG
+        </button>
       </div>
     </article>
-  </section>
 
-  <div class="notice" id="notice"></div>
+  </section>
 </main>
 
-
-<div class="modal-backdrop" id="orderModal" onclick="backdropClose(event)">
-  <section class="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
-    <div class="modal-handle"></div>
-    <div class="steps">
-      <div class="step active" id="stepOne"><span class="step-num">1</span><span>DURASI</span></div>
-      <div class="step" id="stepTwo"><span class="step-num">2</span><span>KONFIRMASI</span></div>
-    </div>
-    <div class="modal-content">
-      <div class="modal-head">
-        <div><div class="modal-eyebrow" id="modalEyebrow">◷ PILIH DURASI</div><h3 id="modalTitle">DRIP WIRE</h3></div>
-        <button class="close-modal" onclick="closeOrder()" aria-label="Tutup">×</button>
-      </div>
-      <div id="durationView"><div class="duration-options" id="durationOptions"></div><button class="modal-next" onclick="goConfirm()">LANJUTKAN →</button></div>
-      <div id="confirmView" style="display:none"><div class="confirm-box" id="confirmDetails"></div><button class="modal-next" onclick="confirmOrder()">KONFIRMASI & ORDER WHATSAPP ↗</button><button class="modal-back" onclick="backToDurations()">← KEMBALI PILIH DURASI</button></div>
-    </div>
-  </section>
-</div>
-
-<footer>© 2026 <b>DRIPCLIENT STORE</b><br>PREMIUM DIGITAL STORE • ALL RIGHTS RESERVED</footer>
+<footer>
+  © 2026 <b>DRIPCLIENT STORE</b><br>
+  PREMIUM DIGITAL STORE • ALL RIGHTS RESERVED
+</footer>
 
 <div class="floating">
-  <a class="float-btn" id="waFloat" href="#" aria-label="WhatsApp admin" onclick="order('TANYA LIST HARGA');return false;">☏</a>
-  <button class="float-btn theme" onclick="document.body.classList.toggle('light')" aria-label="Ganti tema">☼</button>
+  <a class="float-btn"
+     href="https://wa.me/6289654613457"
+     onclick="order('MIN MAU ORDER MINTA LIST NYA');return false;"
+     aria-label="WhatsApp admin">☏</a>
+
+  <button type="button" class="float-btn theme"
+    onclick="document.body.classList.toggle('light')"
+    aria-label="Ganti tema">☼</button>
+</div>
+
+<!-- MODAL ORDER -->
+<div class="modal-backdrop" id="orderModal" onclick="backdropClose(event)">
+  <section class="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+
+    <div class="modal-handle"></div>
+
+    <div class="steps">
+      <div class="step active" id="stepOne">
+        <span class="step-num">1</span><span>DURASI</span>
+      </div>
+      <div class="step" id="stepTwo">
+        <span class="step-num">2</span><span>KONFIRMASI</span>
+      </div>
+    </div>
+
+    <div class="modal-content">
+      <div class="modal-head">
+        <div>
+          <div class="modal-eyebrow" id="modalEyebrow">◷ PILIH DURASI</div>
+          <h3 id="modalTitle">DRIP WIRE</h3>
+        </div>
+        <button type="button" class="close-modal" onclick="closeOrder()">×</button>
+      </div>
+
+      <div id="durationView">
+        <div class="duration-options" id="durationOptions"></div>
+        <button type="button" class="modal-next" onclick="goConfirm()">LANJUTKAN →</button>
+      </div>
+
+      <div id="confirmView" style="display:none">
+        <div class="confirm-box" id="confirmDetails"></div>
+        <button type="button" class="modal-next" onclick="confirmOrder()">
+          KONFIRMASI &amp; ORDER WHATSAPP ↗
+        </button>
+        <button type="button" class="modal-back" onclick="backToDurations()">
+          ← KEMBALI PILIH DURASI
+        </button>
+      </div>
+    </div>
+
+  </section>
 </div>
 
 <script>
-/* GANTI NOMOR ADMIN DAN TAUTAN APK DI BAGIAN INI */
-const nomorAdmin = "6289654613457"; // GANTI dengan nomor WhatsApp admin
-const linkUnduh = { WIRE:"https://whatsapp.com/channel/0029VbCV2jeCsU9KXOJJ2Y30", APKMOD:"https://whatsapp.com/channel/0029VbCV2jeCsU9KXOJJ2Y30", PROXY:"https://whatsapp.com/channel/0029VbCV2jeCsU9KXOJJ2Y30" };
+/* NOMOR ADMIN */
+const nomorAdmin = "6289654613457";
 
-const paket = {
- WIRE:[
-  {durasi:"6 Jam",harga:"Rp 7.000",stok:165,deskripsi:"Masa aktif 6 jam"},
-  {durasi:"12 Jam",harga:"Rp 13.000",stok:116,deskripsi:"Masa aktif 12 jam"},
-  {durasi:"24 Jam",harga:"Rp 20.000",stok:110,deskripsi:"Masa aktif 24 jam"}
- ],
- APKMOD:[
-  {durasi:"1 Day",harga:"Rp 10.000",stok:120,deskripsi:"Masa aktif 1 hari"},
-  {durasi:"3 Day",harga:"Rp 25.000",stok:50,deskripsi:"Masa aktif 3 hari"},
-  {durasi:"7 Day",harga:"Rp 45.000",stok:80,deskripsi:"Masa aktif 7 hari"}
- ],
- PROXY:[
-  {durasi:"1 Day",harga:"Rp 10.000",stok:127,deskripsi:"Masa aktif 1 hari"},
-  {durasi:"3 Day",harga:"Rp 25.000",stok:75,deskripsi:"Masa aktif 3 hari"},
-  {durasi:"7 Day",harga:"Rp 45.000",stok:48,deskripsi:"Masa aktif 7 hari"}
- ]
+/* LINK CHANNEL DOWNLOAD */
+const linkUnduh = {
+  WIRE:"https://whatsapp.com/channel/0029VbCV2jeCsU9KXOJJ2Y30",
+  APKMOD:"https://whatsapp.com/channel/0029VbCV2jeCsU9KXOJJ2Y30",
+  PROXY:"https://whatsapp.com/channel/0029VbCV2jeCsU9KXOJJ2Y30"
 };
-let produkDipilih="WIRE",durasiDipilih=0;
 
+/* DAFTAR PAKET */
+const paket = {
+  WIRE:[
+    {durasi:"6 Jam",harga:"Rp 7.000",stok:165,deskripsi:"Masa aktif 6 jam"},
+    {durasi:"12 Jam",harga:"Rp 13.000",stok:116,deskripsi:"Masa aktif 12 jam"},
+    {durasi:"24 Jam",harga:"Rp 20.000",stok:110,deskripsi:"Masa aktif 24 jam"}
+  ],
+
+  APKMOD:[
+    {durasi:"1 Day",harga:"Rp 10.000",stok:120,deskripsi:"Masa aktif 1 hari"},
+    {durasi:"3 Day",harga:"Rp 25.000",stok:50,deskripsi:"Masa aktif 3 hari"},
+    {durasi:"7 Day",harga:"Rp 45.000",stok:80,deskripsi:"Masa aktif 7 hari"}
+  ],
+
+  PROXY:[
+    {durasi:"1 Day",harga:"Rp 10.000",stok:127,deskripsi:"Masa aktif 1 hari"},
+    {durasi:"3 Day",harga:"Rp 25.000",stok:75,deskripsi:"Masa aktif 3 hari"},
+    {durasi:"7 Day",harga:"Rp 45.000",stok:48,deskripsi:"Masa aktif 7 hari"}
+  ]
+};
+
+let produkDipilih = "WIRE";
+let durasiDipilih = 0;
+
+/* BUKA PILIHAN DURASI */
 function openOrder(produk){
- produkDipilih=produk;durasiDipilih=0;
- document.getElementById("modalTitle").textContent="DRIP "+produk;
- document.getElementById("modalEyebrow").textContent="◷ PILIH DURASI";
- document.getElementById("durationView").style.display="block";
- document.getElementById("confirmView").style.display="none";
- document.getElementById("stepOne").classList.add("active");
- document.getElementById("stepTwo").classList.remove("active");
- renderDurations();
- document.getElementById("orderModal").classList.add("show");
- document.body.classList.add("modal-open");
+  if(!paket[produk]){
+    alert("Produk tidak ditemukan.");
+    return;
+  }
+
+  produkDipilih = produk;
+  durasiDipilih = 0;
+
+  document.getElementById("modalTitle").textContent = "DRIP " + produk;
+  document.getElementById("modalEyebrow").textContent = "◷ PILIH DURASI";
+
+  document.getElementById("durationView").style.display = "block";
+  document.getElementById("confirmView").style.display = "none";
+
+  document.getElementById("stepOne").classList.add("active");
+  document.getElementById("stepTwo").classList.remove("active");
+
+  renderDurations();
+
+  document.getElementById("orderModal").classList.add("show");
+  document.body.classList.add("modal-open");
 }
+
+/* TAMPILKAN PAKET */
 function renderDurations(){
- const list=document.getElementById("durationOptions");list.innerHTML="";
- paket[produkDipilih].forEach((p,index)=>{
-  const button=document.createElement("button");
-  button.type="button";
-  button.className="duration-option"+(index===durasiDipilih?" selected":"");
-  button.innerHTML='<span class="clock-icon">◷</span><span class="duration-info"><b>'+p.durasi+'</b><small>'+p.deskripsi+' <span class="stock">Stok: '+p.stok+'</span></small></span><span class="option-price">'+p.harga+'</span><span class="option-arrow">›</span>';
-  button.addEventListener("click",()=>{durasiDipilih=index;renderDurations();});
-  list.appendChild(button);
- });
+  const list = document.getElementById("durationOptions");
+  list.innerHTML = "";
+
+  paket[produkDipilih].forEach(function(p,index){
+    const button = document.createElement("button");
+
+    button.type = "button";
+    button.className = "duration-option" +
+      (index === durasiDipilih ? " selected" : "");
+
+    button.innerHTML =
+      '<span class="clock-icon">◷</span>' +
+      '<span class="duration-info">' +
+        '<b>' + p.durasi + '</b>' +
+        '<small>' + p.deskripsi +
+        ' <span class="stock">Stok: ' + p.stok + '</span></small>' +
+      '</span>' +
+      '<span class="option-price">' + p.harga + '</span>' +
+      '<span class="option-arrow">›</span>';
+
+    button.addEventListener("click",function(){
+      durasiDipilih = index;
+      renderDurations();
+    });
+
+    list.appendChild(button);
+  });
 }
+
+/* LANJUT KE KONFIRMASI */
 function goConfirm(){
- const p=paket[produkDipilih][durasiDipilih];
- document.getElementById("confirmDetails").innerHTML='<div>Produk: <b>DRIP '+produkDipilih+'</b></div><div>Durasi: <b>'+p.durasi+'</b></div><div>Masa aktif: <b>'+p.deskripsi.replace("Masa aktif ","")+'</b></div><div class="confirm-total"><span>Total pembayaran</span><strong>'+p.harga+'</strong></div>';
- document.getElementById("durationView").style.display="none";
- document.getElementById("confirmView").style.display="block";
- document.getElementById("modalEyebrow").textContent="✓ KONFIRMASI PESANAN";
- document.getElementById("stepTwo").classList.add("active");
-}
-function backToDurations(){
- document.getElementById("durationView").style.display="block";
- document.getElementById("confirmView").style.display="none";
- document.getElementById("modalEyebrow").textContent="◷ PILIH DURASI";
+  const p = paket[produkDipilih][durasiDipilih];
+
+  document.getElementById("confirmDetails").innerHTML =
+    '<div>Prod
