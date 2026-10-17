@@ -43,14 +43,14 @@ h1 span{color:var(--purple);text-shadow:0 0 20px #d000ff77}
 .off{color:#ff2b2b;background:#49000055;border:1px solid #ff0000}
 .buy{display:flex;justify-content:center;align-items:center;width:100%;min-height:44px;border:0;border-radius:12px;background:linear-gradient(100deg,#c000f5,#e000ff);color:#21002c;font-weight:900;font-size:11px;text-decoration:none;cursor:pointer;box-shadow:0 0 20px #d000ff2b;position:relative;z-index:2;touch-action:manipulation;-webkit-tap-highlight-color:transparent}
 .notice{display:none;margin-top:15px;padding:12px;border:1px solid #6d2485;border-radius:12px;color:#e8c4ff;background:#210033;font-size:12px;line-height:1.6}
-/* Galeri tambahan */
-.gallery-section{margin-top:32px;padding:18px 0;overflow:hidden}
+/* Galeri dua foto: tampil bersamaan, tanpa gulir horizontal */
+.gallery-section{margin-top:32px;padding:18px 0;overflow:hidden;width:100%}
 .gallery-title{color:var(--purple);text-align:center;font-size:20px;margin:0 0 8px;text-shadow:0 0 12px #d000ff66}
 .gallery-desc{color:var(--muted);text-align:center;font-size:11px;margin:0 0 18px;letter-spacing:1px}
-.gallery-scroll{display:flex;gap:14px;width:100%;overflow-x:auto;overflow-y:hidden;padding:6px 4px 16px;scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch;overscroll-behavior-x:contain;touch-action:pan-x pan-y;scrollbar-width:thin;scrollbar-color:#d000ff #160024}
-.gallery-item{flex:0 0 82%;min-width:0;max-width:360px;scroll-snap-align:center;border:1px solid #5e1681;border-radius:20px;padding:9px;background:linear-gradient(135deg,#210033,#100019);box-shadow:0 0 18px #d000ff20;overflow:hidden}
-.gallery-item img{display:block;width:100%;height:auto;aspect-ratio:4/3;object-fit:contain;border-radius:14px;background:#0b0012}
-.gallery-caption{text-align:center;color:#e879ff;font-weight:900;font-size:13px;padding:12px 5px 7px;letter-spacing:1px}
+.gallery-scroll{display:grid;grid-template-columns:minmax(0,1fr);gap:16px;width:100%;overflow:visible;padding:6px 0 16px}
+.gallery-item{min-width:0;width:100%;max-width:none;border:1px solid #5e1681;border-radius:17px;padding:7px;background:linear-gradient(135deg,#210033,#100019);box-shadow:0 0 18px #d000ff20;overflow:hidden}
+.gallery-item img{display:block;width:100%;height:auto;aspect-ratio:16/9;object-fit:cover;object-position:center;border-radius:12px;background:#0b0012}
+.gallery-caption{text-align:center;color:#e879ff;font-weight:900;font-size:12px;padding:10px 3px 6px;letter-spacing:.5px}
 footer{text-align:center;padding:24px 14px;border-top:1px solid #351044;color:#987ba9;font-size:11px;line-height:1.8}
 footer b{color:#d000ff}
 .floating{position:fixed;right:16px;bottom:20px;z-index:20;display:flex;flex-direction:column;gap:10px}
@@ -97,7 +97,7 @@ body.light .gallery-item img{background:#f4eaff}
 .confirm-total strong{color:#df37ff;font-size:20px}
 .modal-back{background:transparent;border:0;color:#c99ade;margin-top:15px;padding:10px;cursor:pointer;width:100%}
 body.modal-open{overflow:hidden}
-@media(min-width:650px){.products{grid-template-columns:1fr 1fr}.product{grid-template-columns:112px minmax(0,1fr)}.topline{align-items:flex-start}.gallery-item{flex-basis:45%}.modal-backdrop{align-items:center;padding:20px}.modal{border-radius:26px;max-height:85vh}.modal-content{padding:26px}}
+@media(min-width:650px){.products{grid-template-columns:1fr 1fr}.product{grid-template-columns:112px minmax(0,1fr)}.topline{align-items:flex-start}.modal-backdrop{align-items:center;padding:20px}.modal{border-radius:26px;max-height:85vh}.modal-content{padding:26px}}
 </style>
 </head>
 <body>
@@ -166,7 +166,7 @@ body.modal-open{overflow:hidden}
 
   <section class="gallery-section" id="galeri">
     <h2 class="gallery-title">✦ GALERI PRODUK ✦</h2>
-    <p class="gallery-desc">CONTOH FOTO DRIP CLIENT • GESER KE SAMPING</p>
+    <p class="gallery-desc">CONTOH FOTO DRIP WIRE &amp; DRIP APKMOD</p>
     <div class="gallery-scroll">
       <div class="gallery-item">
         <img src="wir.png" alt="Contoh Foto DRIP WIRE" loading="lazy">
@@ -326,4 +326,6 @@ function downloadInfo(produk) {
   if (link) window.open(link,"_blank","noopener");
   else showNotice("Link unduh " + produk + " belum diatur.");
 }
-$("closeModal").ad
+$("closeModal").addEventListener("click",closeOrder);
+$("nextButton").addEventListener("click",goConfirm);
+$("confirmButton").addEventListener("click
