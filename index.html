@@ -143,6 +143,100 @@ body.modal-open{overflow:hidden}
     <h1><span>DRIP CLIENT</span></h1>
   </section>
 
+<style>
+/* GALERI FOTO */
+.gallery-section{
+  margin:25px 0;
+  padding:0 15px;
+}
+
+.gallery-title{
+  color:#fff;
+  font-size:20px;
+  font-weight:900;
+  margin-bottom:6px;
+}
+
+.gallery-subtitle{
+  color:#c9a5d8;
+  font-size:12px;
+  margin-bottom:15px;
+}
+
+.gallery-container{
+  display:flex;
+  gap:14px;
+  overflow-x:auto;
+  scroll-snap-type:x mandatory;
+  scrollbar-width:none;
+  padding-bottom:10px;
+}
+
+.gallery-container::-webkit-scrollbar{
+  display:none;
+}
+
+.gallery-card{
+  flex:0 0 95%;
+  max-width:450px;
+  scroll-snap-align:start;
+  background:#160024;
+  border:1px solid #7200a0;
+  border-radius:20px;
+  overflow:hidden;
+  box-shadow:0 0 15px #d000ff25;
+}
+
+.gallery-card img{
+  display:block;
+  width:100%;
+  height:180px;
+  object-fit:cover;
+}
+
+.gallery-caption{
+  padding:12px;
+  color:#fff;
+  font-size:13px;
+  font-weight:bold;
+}
+
+.gallery-caption span{
+  display:block;
+  color:#d000ff;
+  font-size:11px;
+  margin-top:5px;
+}
+</style>
+
+<!-- GALERI FOTO -->
+<section class="gallery-section">
+  <div class="gallery-title">GALERI DRIPCLIENT</div>
+  <div class="gallery-subtitle">
+    ✦ CONTOH PRODUK DRIP WIRE & DRIP APKMOD ✦
+  </div>
+
+  <div class="gallery-container">
+
+    <div class="gallery-card">
+      <img src="wir.png" alt="Foto DRIPCLIENT 1">
+      <div class="gallery-caption">
+        DRIP WIRE
+        <span>✦ ANDROID NO ROOT</span>
+      </div>
+    </div>
+
+    <div class="gallery-card">
+      <img src="mod.png" alt="Foto DRIPCLIENT 2">
+      <div class="gallery-caption">
+        DRIP APKMOD
+        <span>✦ ANDROID NO ROOT</span>
+      </div>
+    </div>
+
+  </div>
+</section>
+  
   <section class="products" id="produk">
     <article class="product">
       <div class="visual">
