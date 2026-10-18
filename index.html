@@ -113,6 +113,17 @@ body.light .float-btn.theme{background:#fff}
 .confirm-box{padding:16px;background:#26003b;border:1px solid #53116e;border-radius:16px;line-height:1.9;font-size:13px;color:#cda9df}
 .confirm-box b{color:#fff}.confirm-total{display:flex;justify-content:space-between;align-items:center;margin-top:12px;padding-top:12px;border-top:1px solid #512064;font-size:14px}.confirm-total strong{color:#df37ff;font-size:20px}
 .modal-back{background:transparent;border:0;color:#c99ade;margin-top:15px;padding:10px;cursor:pointer;width:100%}
+
+/* MODAL QRIS */
+.qris-card{background:#fff;color:#17121b;border-radius:18px;padding:16px;text-align:center;margin-top:14px}
+.qris-card img{display:block;width:min(100%,280px);height:auto;aspect-ratio:1/1;object-fit:contain;margin:12px auto;border:1px solid #eee;border-radius:10px}
+.qris-placeholder{width:min(100%,280px);aspect-ratio:1/1;margin:12px auto;border:2px dashed #aaa;border-radius:10px;display:grid;place-items:center;padding:18px;color:#555;font-weight:bold}
+.qris-note{font-size:12px;line-height:1.6;color:#5b5360}
+.qris-actions{display:grid;gap:9px;margin-top:12px}
+.qris-actions a,.qris-actions button{display:block;width:100%;padding:13px;border-radius:12px;border:0;text-align:center;text-decoration:none;font-weight:900;cursor:pointer}
+.qris-pay{background:#d000ff;color:#fff}
+.qris-wa{background:#16a765;color:#fff}
+
 body.modal-open{overflow:hidden}
 @media(min-width:650px){.modal-backdrop{align-items:center;padding:20px}.modal{border-radius:28px;max-height:85vh}.modal-content{padding:26px}.duration-options{gap:12px}}
 
@@ -202,10 +213,23 @@ body.modal-open{overflow:hidden}
     <div class="modal-content">
       <div class="modal-head">
         <div><div class="modal-eyebrow" id="modalEyebrow">◷ PILIH DURASI</div><h3 id="modalTitle">DRIP WIRE</h3></div>
-        <button class="close-modal" onclick="closeOrder()" aria-label="Tutup">×</button>
+        <button class="close-modal" onclick="closeOrder()" aria-label="Tutup">$</button>
       </div>
       <div id="durationView"><div class="duration-options" id="durationOptions"></div><button class="modal-next" onclick="goConfirm()">LANJUTKAN →</button></div>
-      <div id="confirmView" style="display:none"><div class="confirm-box" id="confirmDetails"></div><button class="modal-next" onclick="confirmOrder()">KONFIRMASI & ORDER WHATSAPP ↗</button><button class="modal-back" onclick="backToDurations()">← KEMBALI PILIH DURASI</button></div>
+      <div id="confirmView" style="display:none"><div class="confirm-box" id="confirmDetails"></div><button class="modal-next" onclick="confirmOrder()">KONFIRMASI</button><button class="modal-back" onclick="backToDurations()">← KEMBALI PILIH DURASI</button></div>
+      <div id="qrisView" style="display:none">
+        <div class="confirm-box" id="qrisOrderDetails"></div>
+        <div class="qris-card">
+          <h3 style="margin:0">PEMBAYARAN QRIS</h3>
+          <div id="qrisTimer" style="margin:10px auto 4px;padding:10px 14px;max-width:240px;border-radius:12px;background:#fff0f0;border:1px solid #ff4545;color:#d00000;font-weight:900;font-size:18px">05:00</div>
+          <div id="qrisTimerText" class="qris-note" style="font-weight:bold;color:#c00000">Selesaikan pembayaran dalam 5 menit</div>
+          <div id="qrisImageArea"><div class="qris-placeholder">PASANG GAMBAR QRIS KAMU<br><small>Nama file: qris.png</small></div></div>
+          <div class="qris-note">Scan QRIS menggunakan aplikasi pembayaran yang mendukung QRIS. Pastikan nama penerima dan nominal benar sebelum membayar.</div>
+        </div>
+        <div class="qris-actions">
+          <a class="qris-wa" id="qrisWhatsApp" href="#" target="_blank" rel="noopener">KIRIM BUKTI / KONFIRMASI VIA WHATSAPP</a>          
+        </div>
+      </div>
     </div>
   </section>
 </div>
@@ -221,6 +245,8 @@ body.modal-open{overflow:hidden}
 /* GANTI NOMOR ADMIN DAN TAUTAN APK DI BAGIAN INI */
 const nomorAdmin = "6289654613457"; // GANTI dengan nomor WhatsApp admin
 const linkUnduh = { WIRE:"https://whatsapp.com/channel/0029VbCV2jeCsU9KXOJJ2Y30", APKMOD:"https://whatsapp.com/channel/0029VbCV2jeCsU9KXOJJ2Y30", PROXY:"https://whatsapp.com/channel/0029VbCV2jeCsU9KXOJJ2Y30" };
+// Simpan gambar QRIS milikmu dengan nama qris.png di folder yang sama dengan index.html.
+const gambarQRIS = "qris.png";
 
 const paket = {
  WIRE:[
@@ -247,6 +273,7 @@ function openOrder(produk){
  document.getElementById("modalEyebrow").textContent="◷ PILIH DURASI";
  document.getElementById("durationView").style.display="block";
  document.getElementById("confirmView").style.display="none";
+ document.getElementById("qrisView").style.display="none";
  document.getElementById("stepOne").classList.add("active");
  document.getElementById("stepTwo").classList.remove("active");
  renderDurations();
@@ -268,38 +295,4 @@ function goConfirm(){
  const p=paket[produkDipilih][durasiDipilih];
  document.getElementById("confirmDetails").innerHTML='<div>Produk: <b>DRIP '+produkDipilih+'</b></div><div>Durasi: <b>'+p.durasi+'</b></div><div>Masa aktif: <b>'+p.deskripsi.replace("Masa aktif ","")+'</b></div><div class="confirm-total"><span>Total pembayaran</span><strong>'+p.harga+'</strong></div>';
  document.getElementById("durationView").style.display="none";
- document.getElementById("confirmView").style.display="block";
- document.getElementById("modalEyebrow").textContent="✓ KONFIRMASI PESANAN";
- document.getElementById("stepTwo").classList.add("active");
-}
-function backToDurations(){
- document.getElementById("durationView").style.display="block";
- document.getElementById("confirmView").style.display="none";
- document.getElementById("modalEyebrow").textContent="◷ PILIH DURASI";
- document.getElementById("stepTwo").classList.remove("active");
-}
-function confirmOrder(){
- if(!nomorAdmin||nomorAdmin==="6281234567890"){showNotice("Nomor WhatsApp masih contoh. Ganti variabel nomorAdmin di bagian script dengan nomor admin kamu.");closeOrder();return;}
- const p=paket[produkDipilih][durasiDipilih];
- const pesan="MIN, SAYA MAU ORDER DRIP "+produkDipilih+"\nDurasi: "+p.durasi+"\nHarga: "+p.harga+"\n\n";
- window.open("https://wa.me/"+nomorAdmin+"?text="+encodeURIComponent(pesan),"_blank");
-}
-function closeOrder(){document.getElementById("orderModal").classList.remove("show");document.body.classList.remove("modal-open");}
-function backdropClose(event){if(event.target.id==="orderModal")closeOrder();}
-function order(produk){
- if(paket[produk]){openOrder(produk);return;}
- if(!nomorAdmin||nomorAdmin==="6281234567890"){showNotice("Nomor WhatsApp masih contoh. Ganti variabel nomorAdmin di bagian script dengan nomor admin kamu.");return;}
- window.open("https://wa.me/"+nomorAdmin+"?text="+encodeURIComponent("MIN, SAYA MAU MINTA LIST HARGA DRIP CLIENT."),"_blank");
-}
-function downloadInfo(produk){
- const link=linkUnduh[produk];
- if(link&&link.trim()){window.open(link,"_blank");}
- else{showNotice("Link unduh "+produk+" belum diatur. Tambahkan link APK milikmu pada variabel linkUnduh di bagian script.");}
-}
-function showNotice(message){
- const el=document.getElementById("notice");el.textContent=message;el.style.display="block";el.scrollIntoView({behavior:"smooth",block:"center"});
-}
-document.addEventListener("keydown",event=>{if(event.key==="Escape")closeOrder();});
-</script>
-</body>
-</h
+ docume
